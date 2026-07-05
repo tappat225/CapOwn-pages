@@ -6,8 +6,8 @@
   },
   "hero": {
     "eyebrow": "Agent-native remote execution",
-    "title1": "ONE AGENT.",
-    "title2": "MANY DEVICES.",
+    "title1": "ONE AGENT HOST",
+    "title2": "ALL YOUR DEVICES",
     "description": "Let your AI Agent securely command remote machines through NAT — no inbound ports, no complex setup.",
     "cta_dashboard": "Dashboard",
     "cta_github": "GitHub"

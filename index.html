@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="CapOwn 让一个 AI Agent 安全使用多台设备，无需入站端口，通过最小信任中继触达远程 Worker。"
+    />
+    <meta name="theme-color" content="#070b0a" />
+    <meta property="og:title" content="CapOwn" />
+    <meta
+      property="og:description"
+      content="一个 Agent。多台设备。无需入站端口。最小信任中继。"
+    />
+    <meta property="og:image" content="/capown-relay-hero.png" />
+    <title>CapOwn | Agent-native remote execution</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="preload" href="/capown-relay-hero.png" as="image" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <script defer src="/config.js"></script>
+    <script defer src="/src/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="CapOwn 首页">
+        <img src="/capown-logo.png" alt="" />
+        <span>CAPOWN</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="主导航">
+        <a href="#trust">TRUST</a>
+        <a href="#flow">FLOW</a>
+        <a href="#use">USE CASES</a>
+        <a href="https://github.com/tappat225/CapOwn" data-github-link>GITHUB</a>
+      </nav>
+
+      <button
+        class="menu-button"
+        type="button"
+        aria-label="打开菜单"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        data-menu-open
+      >
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true" data-menu>
+      <div class="mobile-menu-head">
+        <a class="brand" href="#top" aria-label="CapOwn 首页" data-menu-link>
+          <img src="/capown-logo.png" alt="" />
+          <span>CAPOWN</span>
+        </a>
+        <button class="menu-close" type="button" aria-label="关闭菜单" data-menu-close>×</button>
+      </div>
+      <nav aria-label="移动端导航">
+        <a href="#trust" data-menu-link><em>01</em><span>TRUST</span></a>
+        <a href="#flow" data-menu-link><em>02</em><span>FLOW</span></a>
+        <a href="#use" data-menu-link><em>03</em><span>USE CASES</span></a>
+        <a href="https://dashboard.capown.net" data-admin-link data-menu-link><em>04</em><span>DASHBOARD</span></a>
+      </nav>
+      <div class="mobile-menu-foot">
+        <span>[ AGENT-NATIVE ]</span>
+        <span>OUTBOUND ONLY</span>
+      </div>
+    </div>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img class="hero-media" src="/capown-relay-hero.png" alt="" />
+        <div class="hero-gradient-left" aria-hidden="true"></div>
+        <div class="hero-gradient-bottom" aria-hidden="true"></div>
+        <div class="hero-noise" aria-hidden="true"></div>
+
+        <svg class="central-glow" aria-hidden="true" viewBox="0 0 960 480">
+          <defs>
+            <filter id="hero-blur" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="26" />
+            </filter>
+          </defs>
+          <ellipse cx="480" cy="220" rx="380" ry="120" fill="#11362a" filter="url(#hero-blur)" />
+          <ellipse cx="480" cy="212" rx="238" ry="72" fill="#1d5f49" opacity="0.8" filter="url(#hero-blur)" />
+          <ellipse cx="480" cy="206" rx="132" ry="42" fill="#2dd4bf" opacity="0.42" filter="url(#hero-blur)" />
+        </svg>
+
+        <svg class="network-paths" aria-hidden="true" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <filter id="network-glow" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <linearGradient id="network-flow" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#5ed29c" stop-opacity="0" />
+              <stop offset="34%" stop-color="#58e6ff" stop-opacity="0.92" />
+              <stop offset="62%" stop-color="#5ed29c" stop-opacity="1" />
+              <stop offset="100%" stop-color="#7c5cff" stop-opacity="0" />
+            </linearGradient>
+            <mask id="network-title-clear">
+              <rect width="1440" height="820" fill="white" />
+              <rect x="390" y="330" width="690" height="340" rx="60" fill="black" />
+            </mask>
+          </defs>
+
+          <g class="network-lines" mask="url(#network-title-clear)">
+            <path class="network-backbone" d="M260 510C405 506 500 460 626 430" />
+            <path class="network-flowline" style="--delay: -0.2s; --duration: 7.2s" d="M260 510C405 506 500 460 626 430" />
+
+            <path class="network-backbone" d="M626 430C770 294 925 180 1144 160" />
+            <path class="network-flowline" style="--delay: -1.4s; --duration: 8.4s" d="M626 430C770 294 925 180 1144 160" />
+
+            <path class="network-backbone" d="M626 430C805 404 955 374 1218 370" />
+            <path class="network-flowline" style="--delay: -2.1s; --duration: 7.8s" d="M626 430C805 404 955 374 1218 370" />
+
+            <path class="network-backbone" d="M626 430C780 520 948 612 1228 586" />
+            <path class="network-flowline" style="--delay: -3s; --duration: 8.8s" d="M626 430C780 520 948 612 1228 586" />
+
+            <path class="network-backbone" d="M626 430C742 650 930 716 1128 700" />
+            <path class="network-flowline" style="--delay: -0.9s; --duration: 9.2s" d="M626 430C742 650 930 716 1128 700" />
+
+            <path class="network-backbone network-secondary" d="M380 585C505 545 565 498 626 430" />
+            <path class="network-flowline network-secondary-flow" style="--delay: -4.2s; --duration: 10s" d="M380 585C505 545 565 498 626 430" />
+          </g>
+
+          <g class="network-nodes">
+            <circle class="node-halo node-master" cx="626" cy="430" r="44" />
+            <circle class="node-core node-master" cx="626" cy="430" r="8" />
+            <circle class="node-halo" cx="260" cy="510" r="28" />
+            <circle class="node-core" cx="260" cy="510" r="5" />
+            <circle class="node-halo" cx="1144" cy="160" r="24" />
+            <circle class="node-core" cx="1144" cy="160" r="5" />
+            <circle class="node-halo" cx="1218" cy="370" r="24" />
+            <circle class="node-core" cx="1218" cy="370" r="5" />
+            <circle class="node-halo" cx="1228" cy="586" r="24" />
+            <circle class="node-core" cx="1228" cy="586" r="5" />
+            <circle class="node-halo" cx="1128" cy="700" r="24" />
+            <circle class="node-core" cx="1128" cy="700" r="5" />
+          </g>
+        </svg>
+
+        <div class="grid-lines" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="hero-content">
+          <div class="glass-card">
+            <div class="glass-card-top">
+              <span>[ LIVE RELAY ]</span>
+              <i aria-hidden="true"></i>
+            </div>
+            <p>
+              Agent speaks once.
+              <em>Workers execute</em>
+              on the machines you own.
+            </p>
+            <small>Minimal-trust Master. Outbound-only Worker. Structured results.</small>
+          </div>
+
+          <p class="eyebrow reveal">Agent-native remote execution</p>
+          <h1 class="reveal" id="hero-title">
+            ONE AGENT.<br />
+            MANY DEVICES<span>.</span>
+          </h1>
+          <p class="hero-copy reveal">
+            CapOwn gives your local AI Agent remote hands across NAT-bound test machines,
+            NAS boxes, GPU workstations, and cloud servers without opening inbound ports.
+          </p>
+
+          <div class="hero-actions reveal">
+            <a class="primary-action" href="https://dashboard.capown.net" data-admin-link>
+              DASHBOARD
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="secondary-action" href="https://github.com/tappat225/CapOwn" data-github-link>
+              GITHUB
+            </a>
+          </div>
+        </div>
+
+        <div class="bottom-strip reveal">
+          <span>[ SELF-HOSTED OR HOSTED ]</span>
+          <span>CLIENT → MASTER → WORKER → DEVICE</span>
+          <span class="scroll-label">
+            <span>SCROLL</span>
+            <i aria-hidden="true"></i>
+          </span>
+        </div>
+      </section>
+
+      <section class="content-section trust-panel" id="trust">
+        <div class="section-kicker">Why it exists</div>
+        <h2>Give your Agent remote hands without turning every machine into an Agent workstation.</h2>
+        <p>
+          CapOwn keeps the full AI Agent setup on your trusted client machine. Lightweight Workers
+          connect outward to a Master relay, then execute bounded file, shell, and system tasks on
+          the devices you already own.
+        </p>
+      </section>
+
+      <section class="content-section flow-panel" id="flow">
+        <div class="flow-step">
+          <span>01</span>
+          <strong>Client</strong>
+          <p>Your local Agent calls CapOwn through CLI, Skill, SDK, or adapter.</p>
+        </div>
+        <div class="flow-step">
+          <span>02</span>
+          <strong>Master</strong>
+          <p>The relay handles identity, routing, ownership checks, and task state.</p>
+        </div>
+        <div class="flow-step">
+          <span>03</span>
+          <strong>Worker</strong>
+          <p>Remote devices maintain outbound connections and execute inside configured bounds.</p>
+        </div>
+      </section>
+
+      <section class="content-section use-panel" id="use">
+        <div>
+          <div class="section-kicker">Use cases</div>
+          <h2>Built for the awkward machines your Agent still needs.</h2>
+        </div>
+        <ul>
+          <li>NAT-bound Linux test boxes</li>
+          <li>NAS workspaces and private files</li>
+          <li>GPU workstations and local-only tools</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

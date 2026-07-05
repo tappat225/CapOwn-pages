@@ -6,7 +6,7 @@
   },
   "hero": {
     "eyebrow": "Agent 原生远程执行",
-    "title1": "一个Agent宿主，",
+    "title1": "一个Agent宿主",
     "title2": "掌控你所有设备的能力",
     "description": "让你的 AI Agent 安全穿透 NAT 操控远程设备，无需入站端口，无需复杂配置。",
     "cta_dashboard": "控制面板",

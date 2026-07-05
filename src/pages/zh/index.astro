@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import Features from '../../components/Features.astro';
+import Flow from '../../components/Flow.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'zh' as const;
+---
+
+<Base lang={lang} title="CapOwn | Agent 原生远程执行" description="让你的 AI Agent 安全穿透 NAT 操控远程设备，无需入站端口，无需复杂配置。">
+  <Header lang={lang} />
+  <main>
+    <Hero lang={lang} />
+    <Features lang={lang} />
+    <Flow lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Base>

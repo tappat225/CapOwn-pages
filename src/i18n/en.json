@@ -1,0 +1,69 @@
+{
+  "nav": {
+    "features": "Features",
+    "flow": "How it works",
+    "github": "GitHub"
+  },
+  "hero": {
+    "eyebrow": "Agent-native remote execution",
+    "title1": "ONE AGENT.",
+    "title2": "MANY DEVICES.",
+    "description": "Let your AI Agent securely command remote machines through NAT — no inbound ports, no complex setup.",
+    "cta_dashboard": "Dashboard",
+    "cta_github": "GitHub"
+  },
+  "features": {
+    "kicker": "Features",
+    "items": [
+      {
+        "title": "Outbound-only",
+        "description": "Workers connect out to the Master. No public IPs or firewall rules needed."
+      },
+      {
+        "title": "Network-friendly",
+        "description": "Standard HTTPS/443 + SSE. Works in restricted environments."
+      },
+      {
+        "title": "Agent-ready",
+        "description": "Built for Claude Code, Codex and other AI agents. CLI + skill integration."
+      },
+      {
+        "title": "Minimal trust",
+        "description": "Master only relays. Workers execute in bounded workspaces."
+      },
+      {
+        "title": "Host or container",
+        "description": "Run tasks natively or inside Docker isolation per worker."
+      },
+      {
+        "title": "Multi-user",
+        "description": "Per-user tokens and node ownership. One Master, many teams."
+      }
+    ]
+  },
+  "flow": {
+    "kicker": "How it works",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Client",
+        "description": "Your Agent calls CapOwn via CLI or skill."
+      },
+      {
+        "num": "02",
+        "title": "Master",
+        "description": "Relay handles routing, identity, and task state."
+      },
+      {
+        "num": "03",
+        "title": "Worker",
+        "description": "Remote device executes inside configured bounds."
+      }
+    ]
+  },
+  "footer": {
+    "docs": "Docs",
+    "license": "AGPL-3.0 / Apache-2.0"
+  },
+  "lang_switch": "中"
+}

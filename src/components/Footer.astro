@@ -1,0 +1,90 @@
+---
+import type { Lang } from '../i18n/index';
+import { t } from '../i18n/index';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const i = t(lang);
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/capown-logo.png" alt="" width="28" height="28" />
+      <span>CAPOWN</span>
+    </div>
+    <nav class="footer-links">
+      <a href="https://github.com/tappat225/CapOwn" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://github.com/tappat225/CapOwn/blob/main/docs/user_guide.md" target="_blank" rel="noreferrer">{i.footer.docs}</a>
+      <a href="https://dashboard.capown.net" target="_blank" rel="noreferrer">Dashboard</a>
+    </nav>
+    <p class="footer-license">{i.footer.license}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 3rem 1.5rem;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .footer-brand img {
+    height: 1.6rem;
+    width: auto;
+    opacity: 0.7;
+  }
+
+  .footer-brand span {
+    font-size: 0.78rem;
+    font-weight: 860;
+    letter-spacing: 0.2em;
+    color: var(--quiet);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-links a {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color 180ms ease;
+  }
+
+  .footer-links a:hover { color: var(--mint); }
+
+  .footer-license {
+    margin: 0;
+    color: var(--quiet);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 520px) {
+    .footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,69 @@
+{
+  "nav": {
+    "features": "特性",
+    "flow": "工作方式",
+    "github": "GitHub"
+  },
+  "hero": {
+    "eyebrow": "Agent 原生远程执行",
+    "title1": "一个 AGENT。",
+    "title2": "多台设备。",
+    "description": "让你的 AI Agent 安全穿透 NAT 操控远程设备，无需入站端口，无需复杂配置。",
+    "cta_dashboard": "控制面板",
+    "cta_github": "GitHub"
+  },
+  "features": {
+    "kicker": "特性",
+    "items": [
+      {
+        "title": "全出站连接",
+        "description": "Worker 主动连接 Master，无需公网 IP 或防火墙规则。"
+      },
+      {
+        "title": "网络环境友好",
+        "description": "标准 HTTPS/443 + SSE，受限网络也能用。"
+      },
+      {
+        "title": "AI Agent 就绪",
+        "description": "为 Claude Code、Codex 等 Agent 设计。CLI + Skill 集成。"
+      },
+      {
+        "title": "最小信任",
+        "description": "Master 只做中继，Worker 在受限工作区内执行。"
+      },
+      {
+        "title": "宿主机或容器",
+        "description": "每个 Worker 可选原生执行或 Docker 隔离。"
+      },
+      {
+        "title": "多用户支持",
+        "description": "用户级令牌和节点所有权。一个 Master 多个团队。"
+      }
+    ]
+  },
+  "flow": {
+    "kicker": "工作方式",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Client",
+        "description": "你的 Agent 通过 CLI 或 Skill 调用 CapOwn。"
+      },
+      {
+        "num": "02",
+        "title": "Master",
+        "description": "中继处理路由、身份验证和任务状态。"
+      },
+      {
+        "num": "03",
+        "title": "Worker",
+        "description": "远程设备在配置边界内执行任务。"
+      }
+    ]
+  },
+  "footer": {
+    "docs": "文档",
+    "license": "AGPL-3.0 / Apache-2.0"
+  },
+  "lang_switch": "EN"
+}

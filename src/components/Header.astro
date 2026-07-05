@@ -1,0 +1,211 @@
+---
+import type { Lang } from '../i18n/index';
+import { t, getOtherLang } from '../i18n/index';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const i = t(lang);
+const otherLang = getOtherLang(lang);
+---
+
+<header class="site-header">
+  <a class="brand" href={`/${lang}/`} aria-label="CapOwn">
+    <img src="/capown-logo.png" alt="" width="34" height="34" />
+    <span>CAPOWN</span>
+  </a>
+
+  <nav class="desktop-nav" aria-label="Main">
+    <a href={`/${lang}/#features`}>{i.nav.features}</a>
+    <a href={`/${lang}/#flow`}>{i.nav.flow}</a>
+    <a href="https://github.com/tappat225/CapOwn" target="_blank" rel="noreferrer">{i.nav.github}</a>
+    <a class="lang-switch" href={`/${otherLang}/`}>{i.lang_switch}</a>
+  </nav>
+
+  <div class="mobile-actions">
+    <a class="lang-switch" href={`/${otherLang}/`}>{i.lang_switch}</a>
+    <button class="menu-button" type="button" aria-label="Menu" aria-expanded="false" data-menu-open>
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" aria-hidden="true" data-menu>
+  <div class="mobile-menu-head">
+    <a class="brand" href={`/${lang}/`} data-menu-link>
+      <img src="/capown-logo.png" alt="" width="34" height="34" />
+      <span>CAPOWN</span>
+    </a>
+    <button class="menu-close" type="button" aria-label="Close" data-menu-close>&times;</button>
+  </div>
+  <nav>
+    <a href={`/${lang}/#features`} data-menu-link>{i.nav.features}</a>
+    <a href={`/${lang}/#flow`} data-menu-link>{i.nav.flow}</a>
+    <a href="https://github.com/tappat225/CapOwn" target="_blank" rel="noreferrer" data-menu-link>{i.nav.github}</a>
+  </nav>
+</div>
+
+<script>
+  const menu = document.querySelector('[data-menu]');
+  const openBtn = document.querySelector('[data-menu-open]');
+  const closeBtn = document.querySelector('[data-menu-close]');
+  const menuLinks = document.querySelectorAll('[data-menu-link]');
+
+  function setMenu(open: boolean) {
+    menu?.classList.toggle('is-open', open);
+    document.body.classList.toggle('menu-open', open);
+    menu?.setAttribute('aria-hidden', String(!open));
+    openBtn?.setAttribute('aria-expanded', String(open));
+  }
+
+  openBtn?.addEventListener('click', () => setMenu(true));
+  closeBtn?.addEventListener('click', () => setMenu(false));
+  menuLinks.forEach(l => l.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+</script>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem clamp(1.25rem, 3.2vw, 2.5rem);
+    background: linear-gradient(180deg, rgba(7, 11, 10, 0.9) 0%, transparent 100%);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    transition: opacity 180ms ease;
+  }
+
+  .brand:hover { opacity: 0.78; }
+
+  .brand img {
+    height: 2.15rem;
+    width: auto;
+    filter: drop-shadow(0 0 18px rgba(94, 210, 156, 0.2));
+  }
+
+  .brand span {
+    font-size: 0.88rem;
+    font-weight: 860;
+    letter-spacing: 0.22em;
+  }
+
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 2.55rem);
+  }
+
+  .desktop-nav a {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.95rem;
+    font-weight: 520;
+    transition: color 180ms ease;
+  }
+
+  .desktop-nav a:hover { color: var(--mint); }
+
+  .lang-switch {
+    padding: 0.35rem 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: border-color 180ms ease, color 180ms ease;
+  }
+
+  .lang-switch:hover {
+    border-color: var(--mint);
+    color: var(--mint);
+  }
+
+  .mobile-actions {
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .menu-button, .menu-close {
+    border: 0;
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+  }
+
+  .menu-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+  }
+
+  .menu-button span {
+    display: block;
+    width: 1.65rem;
+    height: 2px;
+    margin: 0.4rem auto;
+    background: currentColor;
+  }
+
+  .menu-close {
+    font-size: 2.2rem;
+    line-height: 1;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: flex;
+    flex-direction: column;
+    background: rgba(7, 11, 10, 0.985);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.6rem);
+    transition: opacity 220ms ease, transform 220ms ease;
+    backdrop-filter: blur(16px);
+  }
+
+  .mobile-menu :global(.is-open) { /* handled via global class */ }
+
+  :global(.mobile-menu.is-open) {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .mobile-menu-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.35rem 1.5rem;
+  }
+
+  .mobile-menu nav {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .mobile-menu nav a {
+    font-size: clamp(2rem, 10vw, 3.5rem);
+    font-weight: 860;
+  }
+
+  @media (max-width: 820px) {
+    .desktop-nav { display: none; }
+    .mobile-actions { display: flex; }
+  }
+</style>

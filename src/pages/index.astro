@@ -1,0 +1,16 @@
+---
+// Root index — redirect to browser's preferred language
+---
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0; url=/en/" />
+    <script is:inline>
+      const lang = navigator.language || navigator.userLanguage || 'en';
+      const target = lang.startsWith('zh') ? '/zh/' : '/en/';
+      window.location.replace(target);
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,6 +1,6 @@
 # CapOwn Pages
 
-CapOwn 的静态产品主页，用于产品介绍和跳转官方管理页面。该仓库不包含服务端逻辑，适合直接部署到 Cloudflare Pages。
+CapOwn 的静态产品主页，用于产品介绍和跳转官方管理页面。该仓库不包含服务端逻辑，适合部署到 GitHub Pages。
 
 ## 本地使用
 
@@ -11,7 +11,7 @@ npm run dev
 默认访问：
 
 ```text
-http://localhost:4173
+http://localhost:4321
 ```
 
 ## 构建
@@ -22,21 +22,38 @@ npm run build
 
 构建产物输出到 `dist/`。
 
-## Cloudflare Pages
+## GitHub Pages
 
-推荐配置：
+仓库已配置 GitHub Actions 自动部署：
+
+- Workflow：`.github/workflows/deploy-pages.yml`
+- 触发：`master` 分支 push，或手动 `workflow_dispatch`
+- Build command：`npm run build`
+- Build output directory：`dist`
+- Node.js version：`22`
+- 自定义域名：`www.capown.net`（见 `public/CNAME`）
+
+### 首次启用步骤
+
+1. 打开仓库 **Settings → Pages**
+2. **Source** 选择 **GitHub Actions**
+3. 在 **Custom domain** 填入 `www.capown.net`，保存
+4. 勾选 **Enforce HTTPS**（DNS 生效后可用）
+5. 在域名 DNS 添加 CNAME 记录：
 
 ```text
-Framework preset: None
-Build command: npm run build
-Build output directory: dist
-Node.js version: 22
+Type:  CNAME
+Name:  www
+Value: tappat225.github.io
+TTL:   自动 / 3600
 ```
 
-可选环境变量：
+6. push 到 `master`，或在 **Actions** 里手动运行 **Deploy to GitHub Pages**
+
+站点地址：
 
 ```text
-VITE_GITHUB_URL=https://github.com/tappat225/CapOwn
+https://www.capown.net
 ```
 
 “进入管理页面”按钮固定跳转到：

@@ -32,7 +32,7 @@ jobs:
 
       - name: Build
         env:
-          PUBLIC_SITE_URL: https://www.capown.net
+          PUBLIC_SITE_URL: https://capown.net
           PUBLIC_BASE_PATH: /
         run: npm run build
 

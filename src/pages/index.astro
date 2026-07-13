@@ -5,10 +5,10 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0; url=/en/" />
-    <script is:inline>
+    <meta http-equiv="refresh" content={`0; url=${import.meta.env.BASE_URL}en/`} />
+    <script define:vars={{ base: import.meta.env.BASE_URL }}>
       const lang = navigator.language || navigator.userLanguage || 'en';
-      const target = lang.startsWith('zh') ? '/zh/' : '/en/';
+      const target = lang.startsWith('zh') ? `${base}zh/` : `${base}en/`;
       window.location.replace(target);
     </script>
   </head>

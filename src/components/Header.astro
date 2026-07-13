@@ -8,20 +8,21 @@ interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const i = t(lang);
 const otherLang = getOtherLang(lang);
+const base = import.meta.env.BASE_URL;
 const docsUrl = lang === 'zh' ? 'https://docs.capown.net/zh/' : 'https://docs.capown.net/';
 ---
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="brand" href={`/${lang}/`} aria-label="CapOwn home">
-      <img src="/capown-logo.png" alt="" width="34" height="34" />
+    <a class="brand" href={`${base}${lang}/`} aria-label="CapOwn home">
+      <img src={`${base}capown-logo.png`} alt="" width="34" height="34" />
       <span>CapOwn</span>
     </a>
 
     <nav class="desktop-nav" aria-label="Main">
-      <a href={`/${lang}/#capabilities`}>{i.nav.capabilities}</a>
-      <a href={`/${lang}/#how`}>{i.nav.flow}</a>
-      <a href={`/${lang}/#security`}>{i.nav.security}</a>
+      <a href={`${base}${lang}/#capabilities`}>{i.nav.capabilities}</a>
+      <a href={`${base}${lang}/#how`}>{i.nav.flow}</a>
+      <a href={`${base}${lang}/#security`}>{i.nav.security}</a>
     </nav>
 
     <div class="desktop-actions">
@@ -31,11 +32,11 @@ const docsUrl = lang === 'zh' ? 'https://docs.capown.net/zh/' : 'https://docs.ca
       <a class="icon-link" href="https://github.com/tappat225/CapOwn" target="_blank" rel="noreferrer" aria-label="GitHub">
         <GitFork aria-hidden="true" />
       </a>
-      <a class="lang-switch" href={`/${otherLang}/`}>{i.lang_switch}</a>
+      <a class="lang-switch" href={`${base}${otherLang}/`}>{i.lang_switch}</a>
     </div>
 
     <div class="mobile-actions">
-      <a class="lang-switch" href={`/${otherLang}/`}>{i.lang_switch}</a>
+      <a class="lang-switch" href={`${base}${otherLang}/`}>{i.lang_switch}</a>
       <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" data-menu-open>
         <Menu aria-hidden="true" />
       </button>
@@ -45,16 +46,16 @@ const docsUrl = lang === 'zh' ? 'https://docs.capown.net/zh/' : 'https://docs.ca
 
 <div class="mobile-menu" aria-hidden="true" data-menu>
   <div class="mobile-menu-head">
-    <a class="brand" href={`/${lang}/`} data-menu-link>
-      <img src="/capown-logo.png" alt="" width="34" height="34" />
+    <a class="brand" href={`${base}${lang}/`} data-menu-link>
+      <img src={`${base}capown-logo.png`} alt="" width="34" height="34" />
       <span>CapOwn</span>
     </a>
     <button class="menu-button" type="button" aria-label="Close menu" data-menu-close><X aria-hidden="true" /></button>
   </div>
   <nav>
-    <a href={`/${lang}/#capabilities`} data-menu-link>{i.nav.capabilities}</a>
-    <a href={`/${lang}/#how`} data-menu-link>{i.nav.flow}</a>
-    <a href={`/${lang}/#security`} data-menu-link>{i.nav.security}</a>
+    <a href={`${base}${lang}/#capabilities`} data-menu-link>{i.nav.capabilities}</a>
+    <a href={`${base}${lang}/#how`} data-menu-link>{i.nav.flow}</a>
+    <a href={`${base}${lang}/#security`} data-menu-link>{i.nav.security}</a>
     <a href={docsUrl} target="_blank" rel="noreferrer" data-menu-link>{i.nav.docs}</a>
     <a href="https://github.com/tappat225/CapOwn" target="_blank" rel="noreferrer" data-menu-link>GitHub</a>
     <a href="https://gitee.com/TappaT/CapOwn" target="_blank" rel="noreferrer" data-menu-link>Gitee</a>

@@ -6,13 +6,14 @@ import { t } from '../i18n/index';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const i = t(lang);
+const base = import.meta.env.BASE_URL;
 const docsUrl = lang === 'zh' ? 'https://docs.capown.net/zh/' : 'https://docs.capown.net/';
 ---
 
 <footer class="site-footer">
   <div class="footer-inner section-shell">
     <div class="footer-brand">
-      <div><img src="/capown-logo.png" alt="" width="34" height="34" /><strong>CapOwn</strong></div>
+      <div><img src={`${base}capown-logo.png`} alt="" width="34" height="34" /><strong>CapOwn</strong></div>
       <p>{i.footer.tagline}</p>
     </div>
     <nav aria-label="Footer">

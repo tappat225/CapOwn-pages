@@ -2,19 +2,25 @@
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
+import ProductDemo from '../../components/ProductDemo.astro';
 import Features from '../../components/Features.astro';
 import Flow from '../../components/Flow.astro';
+import Security from '../../components/Security.astro';
+import GetStarted from '../../components/GetStarted.astro';
 import Footer from '../../components/Footer.astro';
 
 const lang = 'zh' as const;
 ---
 
-<Base lang={lang} title="CapOwn | AI智能体原生远程执行" description="让你的 AI Agent 安全穿透 NAT 操控远程设备，无需入站端口，无需复杂配置。">
+<Base lang={lang} title="CapOwn | AI Agent 原生远程执行" description="通过 MCP 或 CLI，让 AI Agent 安全调度 NAT 后的远程设备，无需开放入站端口。">
   <Header lang={lang} />
   <main>
     <Hero lang={lang} />
+    <ProductDemo lang={lang} />
     <Features lang={lang} />
     <Flow lang={lang} />
+    <Security lang={lang} />
+    <GetStarted lang={lang} />
   </main>
   <Footer lang={lang} />
 </Base>

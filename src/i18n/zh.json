@@ -1,68 +1,115 @@
 {
   "nav": {
-    "features": "特性",
+    "capabilities": "能力",
     "flow": "工作方式",
-    "github": "GitHub"
+    "security": "安全边界",
+    "docs": "文档"
   },
   "hero": {
-    "eyebrow": "AI智能体原生远程执行",
-    "title1": "一个AI智能体宿主",
-    "title2": "掌控你所有设备的能力",
-    "description": "让你的 AI Agent 安全穿透 NAT 操控远程设备，无需入站端口，无需复杂配置。",
-    "cta_dashboard": "控制面板",
-    "cta_github": "GitHub"
+    "eyebrow": "AI Agent 原生远程执行",
+    "title": "让 AI Agent 安全调度你的远程设备",
+    "description": "通过 MCP 或 CLI，在 NAT 后的机器上运行命令、操作文件和管理长任务，无需开放入站端口。",
+    "cta_docs": "快速开始",
+    "cta_github": "查看 GitHub",
+    "gitee_prefix": "中国大陆访问？",
+    "cta_gitee": "前往 Gitee 镜像"
   },
-  "features": {
-    "kicker": "特性",
-    "items": [
+  "proof": [
+    { "value": "MCP + CLI", "label": "两种 Agent 原生接口" },
+    { "value": "HTTPS / SSE", "label": "Worker 仅需出站连接" },
+    { "value": "11 项能力", "label": "Shell、文件、系统与任务" }
+  ],
+  "demo": {
+    "kicker": "一次真实的执行路径",
+    "title": "一个请求，路由到正确的 Worker",
+    "description": "Master 完成认证与路由，Worker 在配置的工作空间内执行，并返回结构化结果。",
+    "agent": "Agent 宿主",
+    "request": "检查远程构建，并找出所有 TODO。",
+    "tool": "MCP 工具调用",
+    "master": "CapOwn Master",
+    "master_status": "认证通过 · 正在路由",
+    "worker": "已选择 Worker",
+    "worker_name": "linux-build-01",
+    "worker_meta": "Linux · 容器 · 在线",
+    "result": "已扫描 12 个文件 · 找到 3 处",
+    "boundary": "工作空间边界已生效"
+  },
+  "capabilities": {
+    "kicker": "核心能力",
+    "title": "Agent 真正需要的远程操作",
+    "description": "用紧凑的工具面完成设备发现、命令执行、文件操作和任务生命周期管理。",
+    "groups": [
       {
-        "title": "全出站连接",
-        "description": "Worker 主动连接 Master，无需公网 IP 或防火墙规则。"
+        "eyebrow": "发现",
+        "title": "选择正确的机器",
+        "description": "列出当前用户拥有的 Worker，并读取操作系统、执行模式、工作空间与能力信息。",
+        "items": ["workers_list", "system_info"]
       },
       {
-        "title": "网络环境友好",
-        "description": "标准 HTTPS/443 + SSE，受限网络也能用。"
+        "eyebrow": "操作",
+        "title": "远程运行与编辑",
+        "description": "执行 Shell 命令并使用受边界约束的文件工具，无需为 Agent 拼装一套 SSH 流程。",
+        "items": ["shell_run", "file_read", "file_write", "file_search"]
       },
       {
-        "title": "AI Agent 就绪",
-        "description": "为 Claude Code、Codex 等 Agent 设计。CLI + Skill 集成。"
-      },
-      {
-        "title": "最小信任",
-        "description": "Master 只做中继，Worker 在受限工作区内执行。"
-      },
-      {
-        "title": "宿主机或容器",
-        "description": "每个 Worker 可选原生执行或 Docker 隔离。"
-      },
-      {
-        "title": "多用户支持",
-        "description": "用户级令牌和节点所有权。一个 Master 多个团队。"
+        "eyebrow": "控制",
+        "title": "管理耗时任务",
+        "description": "派发长任务、等待完成、查看近期任务，并在需要时取消运行中的工作。",
+        "items": ["shell_dispatch", "task_wait", "task_list", "task_cancel"]
       }
     ]
   },
   "flow": {
     "kicker": "工作方式",
+    "title": "边界清晰的小型控制平面",
+    "description": "CapOwn 把现有 AI Agent 连接到远程执行节点；它本身不是 AI Agent，也不是 VPN。",
     "steps": [
       {
         "num": "01",
-        "title": "Client",
-        "description": "你的 Agent 通过 CLI 或 Skill 调用 CapOwn。"
+        "title": "连接 Agent",
+        "description": "使用带认证的 Streamable HTTP MCP，或轻量的 capown CLI 与 Agent Skill。"
       },
       {
         "num": "02",
-        "title": "Master",
-        "description": "中继处理路由、身份验证和任务状态。"
+        "title": "由 Master 路由",
+        "description": "Master 校验 Client Token、用户归属、目标 Worker 和请求结构后再进行路由。"
       },
       {
         "num": "03",
-        "title": "Worker",
-        "description": "远程设备在配置边界内执行任务。"
+        "title": "在 Worker 执行",
+        "description": "仅出站连接的 Worker 在宿主机或容器工作空间内执行，并回传结果。"
       }
     ]
   },
+  "security": {
+    "kicker": "设计边界",
+    "title": "无需把远程机器暴露到公网",
+    "description": "连接由 Worker 主动发起，每次操作都要经过身份、归属与工作空间校验。",
+    "items": [
+      { "title": "不开放 Worker 入站端口", "description": "Worker 通过标准 HTTPS 与 SSE 主动连接，保留现有 NAT 和防火墙边界。" },
+      { "title": "按用户隔离所有权", "description": "Client Token 只能寻址同一用户拥有的 Worker。" },
+      { "title": "有边界的执行", "description": "路径始终相对配置的工作空间解析，任何越界访问都会被拒绝。" },
+      { "title": "宿主机或容器", "description": "受信环境可用原生执行，也可为每个 Worker 选择 Docker 隔离。" }
+    ]
+  },
+  "start": {
+    "kicker": "开始使用",
+    "title": "从新 Master 到 Agent 可调用的 Worker",
+    "description": "当前上手流程使用短时效 Enrollment URL，每个组件只需一条安装命令。",
+    "steps": [
+      { "num": "1", "title": "安装 Master", "description": "设置公共 URL，并完成引导式初始化。" },
+      { "num": "2", "title": "创建 Enrollment", "description": "为用户生成一个短时效注册包。" },
+      { "num": "3", "title": "完成连接", "description": "安装 Worker 与 Client，再为 Agent 添加 MCP 或 CLI Skill。" }
+    ],
+    "cta_docs": "阅读项目文档",
+    "cta_github": "GitHub 仓库",
+    "cta_gitee": "Gitee 镜像"
+  },
   "footer": {
-    "docs": "文档",
+    "tagline": "让 AI Agent 安全执行远程机器上的工作。",
+    "docs": "项目文档",
+    "github": "GitHub",
+    "gitee": "Gitee",
     "license": "AGPL-3.0 / Apache-2.0"
   },
   "lang_switch": "EN"

@@ -1,68 +1,115 @@
 {
   "nav": {
-    "features": "Features",
+    "capabilities": "Capabilities",
     "flow": "How it works",
-    "github": "GitHub"
+    "security": "Security",
+    "docs": "Docs"
   },
   "hero": {
     "eyebrow": "Agent-native remote execution",
-    "title1": "ONE AGENT HOST",
-    "title2": "ALL YOUR DEVICES",
-    "description": "Let your AI Agent securely command remote machines through NAT — no inbound ports, no complex setup.",
-    "cta_dashboard": "Dashboard",
-    "cta_github": "GitHub"
+    "title": "Give your AI agent a safe path to every machine",
+    "description": "Run shell commands, work with files, and manage long tasks on machines behind NAT through MCP or CLI. No inbound ports required.",
+    "cta_docs": "Get started",
+    "cta_github": "View on GitHub",
+    "gitee_prefix": "In mainland China?",
+    "cta_gitee": "View the Gitee mirror"
   },
-  "features": {
-    "kicker": "Features",
-    "items": [
+  "proof": [
+    { "value": "MCP + CLI", "label": "Two agent-native interfaces" },
+    { "value": "HTTPS / SSE", "label": "Outbound-only worker links" },
+    { "value": "11 capabilities", "label": "Shell, files, system, and tasks" }
+  ],
+  "demo": {
+    "kicker": "A real execution path",
+    "title": "One request, routed to the right worker",
+    "description": "The Master authenticates and routes. The Worker executes within its configured workspace and returns a structured result.",
+    "agent": "Agent host",
+    "request": "Check the remote build and find any TODOs.",
+    "tool": "MCP tool call",
+    "master": "CapOwn Master",
+    "master_status": "Authenticated · routing",
+    "worker": "Selected worker",
+    "worker_name": "linux-build-01",
+    "worker_meta": "Linux · container · online",
+    "result": "12 files scanned · 3 matches",
+    "boundary": "workspace boundary enforced"
+  },
+  "capabilities": {
+    "kicker": "Capabilities",
+    "title": "The remote operations an agent actually needs",
+    "description": "A compact tool surface for discovery, execution, files, and task lifecycle management.",
+    "groups": [
       {
-        "title": "Outbound-only",
-        "description": "Workers connect out to the Master. No public IPs or firewall rules needed."
+        "eyebrow": "Discover",
+        "title": "Choose the right machine",
+        "description": "List owned workers and inspect their operating system, execution mode, workspace, and advertised capabilities.",
+        "items": ["workers_list", "system_info"]
       },
       {
-        "title": "Network-friendly",
-        "description": "Standard HTTPS/443 + SSE. Works in restricted environments."
+        "eyebrow": "Operate",
+        "title": "Run and edit remotely",
+        "description": "Execute shell commands and use bounded file operations without stitching together an SSH workflow.",
+        "items": ["shell_run", "file_read", "file_write", "file_search"]
       },
       {
-        "title": "Agent-ready",
-        "description": "Built for Claude Code, Codex and other AI agents. CLI + skill integration."
-      },
-      {
-        "title": "Minimal trust",
-        "description": "Master only relays. Workers execute in bounded workspaces."
-      },
-      {
-        "title": "Host or container",
-        "description": "Run tasks natively or inside Docker isolation per worker."
-      },
-      {
-        "title": "Multi-user",
-        "description": "Per-user tokens and node ownership. One Master, many teams."
+        "eyebrow": "Control",
+        "title": "Handle work that takes time",
+        "description": "Dispatch long jobs, wait for completion, inspect recent tasks, and cancel work when needed.",
+        "items": ["shell_dispatch", "task_wait", "task_list", "task_cancel"]
       }
     ]
   },
   "flow": {
     "kicker": "How it works",
+    "title": "A small control plane with clear boundaries",
+    "description": "CapOwn connects an existing AI agent to remote execution nodes. It is not an AI agent or a VPN.",
     "steps": [
       {
         "num": "01",
-        "title": "Client",
-        "description": "Your Agent calls CapOwn via CLI or skill."
+        "title": "Connect your agent",
+        "description": "Use the authenticated Streamable HTTP MCP endpoint, or the lightweight capown CLI and agent skill."
       },
       {
         "num": "02",
-        "title": "Master",
-        "description": "Relay handles routing, identity, and task state."
+        "title": "Route through Master",
+        "description": "Master verifies the client token, ownership, target worker, and request schema before routing."
       },
       {
         "num": "03",
-        "title": "Worker",
-        "description": "Remote device executes inside configured bounds."
+        "title": "Execute on Worker",
+        "description": "The outbound-connected Worker runs inside its configured host or container workspace and reports the result."
       }
     ]
   },
+  "security": {
+    "kicker": "Designed boundaries",
+    "title": "Remote access without opening the machine to the internet",
+    "description": "Workers initiate the connection and every operation stays subject to identity, ownership, and workspace checks.",
+    "items": [
+      { "title": "No inbound worker port", "description": "Workers connect outward over standard HTTPS and SSE, so NAT and firewall rules stay intact." },
+      { "title": "Per-user ownership", "description": "Client tokens can only address Workers owned by the same user." },
+      { "title": "Bounded execution", "description": "Paths are resolved against the configured workspace and traversal outside it is rejected." },
+      { "title": "Host or container", "description": "Choose native execution for trusted environments or Docker isolation per Worker." }
+    ]
+  },
+  "start": {
+    "kicker": "Get started",
+    "title": "From a new Master to an agent-ready Worker",
+    "description": "The current onboarding flow uses a short-lived enrollment URL and one install command per component.",
+    "steps": [
+      { "num": "1", "title": "Install Master", "description": "Set the public URL and complete the guided bootstrap." },
+      { "num": "2", "title": "Create enrollment", "description": "Generate a short-lived bundle for a user." },
+      { "num": "3", "title": "Connect", "description": "Install Worker and Client, then add MCP or the CLI skill to your agent host." }
+    ],
+    "cta_docs": "Read the documentation",
+    "cta_github": "GitHub repository",
+    "cta_gitee": "Gitee mirror"
+  },
   "footer": {
-    "docs": "Docs",
+    "tagline": "Agent-native remote execution across your machines.",
+    "docs": "Documentation",
+    "github": "GitHub",
+    "gitee": "Gitee",
     "license": "AGPL-3.0 / Apache-2.0"
   },
   "lang_switch": "中"

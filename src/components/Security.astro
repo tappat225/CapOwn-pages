@@ -1,0 +1,56 @@
+---
+import { Box, KeyRound, Network, ShieldCheck } from '@lucide/astro';
+import type { Lang } from '../i18n/index';
+import { t } from '../i18n/index';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const i = t(lang);
+const icons = [Network, KeyRound, ShieldCheck, Box];
+---
+
+<section class="security" id="security" aria-labelledby="security-title">
+  <div class="section-shell security-layout">
+    <div class="section-heading">
+      <p class="section-kicker">{i.security.kicker}</p>
+      <h2 class="section-title" id="security-title">{i.security.title}</h2>
+      <p class="section-description">{i.security.description}</p>
+      <div class="outbound-diagram" aria-hidden="true">
+        <span>Worker</span><div class="signal"><i></i><i></i><i></i></div><span>Master</span>
+        <small>outbound HTTPS / SSE</small>
+      </div>
+    </div>
+    <div class="security-list">
+      {i.security.items.map((item, index) => {
+        const Icon = icons[index];
+        return (
+          <article>
+            <div class="security-icon"><Icon aria-hidden="true" /></div>
+            <div><h3>{item.title}</h3><p>{item.description}</p></div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .security { padding: clamp(5rem, 9vw, 9rem) 0; background: #eef0ee; color: #12171b; }
+  .security-layout { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr); gap: clamp(3rem, 8vw, 8rem); }
+  .security :global(.section-kicker) { color: #197b52; }
+  .security :global(.section-heading) { margin-bottom: 0; }
+  .security :global(.section-description) { color: #59626a; }
+  .outbound-diagram { position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.8rem; max-width: 410px; margin-top: 3rem; padding: 1.1rem; border: 1px solid #c8cdca; border-radius: 6px; background: #f8f9f8; font-family: var(--font-mono); font-size: 0.7rem; }
+  .outbound-diagram span { padding: 0.5rem; border: 1px solid #d3d8d5; border-radius: 4px; }
+  .signal { display: flex; justify-content: space-around; }
+  .signal i { width: 0.4rem; height: 0.4rem; border-radius: 50%; background: #2a9b68; }
+  .outbound-diagram small { position: absolute; left: 50%; bottom: -1.6rem; color: #6e777d; font-size: 0.58rem; transform: translateX(-50%); white-space: nowrap; }
+  .security-list { border-top: 1px solid #c6cbc8; }
+  .security-list article { display: grid; grid-template-columns: auto 1fr; gap: 1rem; padding: 1.6rem 0; border-bottom: 1px solid #c6cbc8; }
+  .security-icon { display: grid; width: 2.35rem; height: 2.35rem; place-items: center; border: 1px solid #bcc7c1; border-radius: 5px; color: #197b52; }
+  .security-icon svg { width: 1.1rem; height: 1.1rem; }
+  h3 { margin: 0; font-size: 1rem; font-weight: 660; }
+  .security-list p { margin: 0.5rem 0 0; color: #5c666d; font-size: 0.86rem; line-height: 1.65; }
+  @media (max-width: 860px) { .security-layout { grid-template-columns: 1fr; } .security-list { margin-top: 1rem; } }
+  @media (max-width: 520px) { .outbound-diagram { grid-template-columns: auto 1fr auto; gap: 0.45rem; padding: 0.8rem; } }
+</style>

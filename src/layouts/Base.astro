@@ -1,5 +1,7 @@
 ---
 import type { Lang } from '../i18n/index';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
 
 interface Props {
@@ -9,6 +11,8 @@ interface Props {
 }
 
 const { lang, title = 'CapOwn', description = '' } = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL('/capown-relay-hero.png', Astro.site);
 ---
 
 <!doctype html>
@@ -22,7 +26,11 @@ const { lang, title = 'CapOwn', description = '' } = Astro.props;
     <meta name="google-site-verification" content="hd75-ep4m-cUZI6eFI4emjlIree957FClYNyKhOim-w" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/capown-relay-hero.png" />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href={canonicalUrl} />
     <title>{title}</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />

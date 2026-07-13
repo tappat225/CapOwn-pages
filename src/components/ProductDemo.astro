@@ -1,0 +1,111 @@
+---
+import { Bot, Check, ChevronRight, CloudCog, Server, ShieldCheck, Terminal } from '@lucide/astro';
+import type { Lang } from '../i18n/index';
+import { t } from '../i18n/index';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const i = t(lang);
+---
+
+<section class="demo-section" aria-labelledby="demo-title">
+  <div class="section-shell">
+    <div class="section-heading">
+      <p class="section-kicker">{i.demo.kicker}</p>
+      <h2 class="section-title" id="demo-title">{i.demo.title}</h2>
+      <p class="section-description">{i.demo.description}</p>
+    </div>
+
+    <div class="execution-surface">
+      <div class="surface-bar">
+        <div class="surface-title"><Terminal aria-hidden="true" /> CapOwn execution</div>
+        <div class="surface-live"><span></span> live route</div>
+      </div>
+      <div class="execution-grid">
+        <div class="agent-pane">
+          <div class="pane-label"><Bot aria-hidden="true" /> {i.demo.agent}</div>
+          <p class="agent-request">{i.demo.request}</p>
+          <div class="tool-call">
+            <div class="tool-call-head"><span>{i.demo.tool}</span><span>24 ms</span></div>
+            <code><span>shell_run</span>({`{`}<br />&nbsp;&nbsp;worker: <em>"linux-build-01"</em>,<br />&nbsp;&nbsp;command: <em>"rg TODO"</em><br />{`}`})</code>
+          </div>
+        </div>
+
+        <div class="route-pane">
+          <div class="route-line"><span></span><ChevronRight aria-hidden="true" /></div>
+          <div class="master-node">
+            <CloudCog aria-hidden="true" />
+            <strong>{i.demo.master}</strong>
+            <span>{i.demo.master_status}</span>
+          </div>
+          <div class="route-line outgoing"><span></span><ChevronRight aria-hidden="true" /></div>
+        </div>
+
+        <div class="worker-pane">
+          <div class="pane-label"><Server aria-hidden="true" /> {i.demo.worker}</div>
+          <div class="worker-identity">
+            <div class="worker-icon"><Server aria-hidden="true" /></div>
+            <div><strong>{i.demo.worker_name}</strong><span>{i.demo.worker_meta}</span></div>
+            <span class="online-dot" aria-label="online"></span>
+          </div>
+          <div class="result-line"><Check aria-hidden="true" /><span>{i.demo.result}</span></div>
+          <div class="boundary-line"><ShieldCheck aria-hidden="true" /> {i.demo.boundary}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .demo-section { padding: clamp(5rem, 9vw, 8.5rem) 0; background: #f1f3f2; color: #11161a; }
+  .demo-section :global(.section-kicker) { color: #197b52; }
+  .demo-section :global(.section-description) { color: #59636b; }
+  .execution-surface { overflow: hidden; border: 1px solid #2b343c; border-radius: 7px; background: #0c1116; color: var(--white); box-shadow: 0 28px 70px rgba(28,35,39,0.18); }
+  .surface-bar { display: flex; align-items: center; justify-content: space-between; height: 3rem; padding: 0 1rem; border-bottom: 1px solid var(--line); background: #12181e; }
+  .surface-title, .surface-live { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.7rem; }
+  .surface-title { color: #cbd2d8; }
+  .surface-title svg { width: 0.95rem; height: 0.95rem; color: var(--mint); }
+  .surface-live { color: #7f8b95; }
+  .surface-live span, .online-dot { width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--mint); box-shadow: 0 0 10px rgba(112,214,163,0.7); }
+  .execution-grid { display: grid; grid-template-columns: minmax(290px, 1.1fr) minmax(170px, 0.62fr) minmax(280px, 1fr); min-height: 390px; }
+  .agent-pane, .worker-pane { padding: clamp(1.5rem, 3vw, 2.4rem); }
+  .agent-pane { border-right: 1px solid var(--line); }
+  .worker-pane { border-left: 1px solid var(--line); }
+  .pane-label { display: flex; align-items: center; gap: 0.55rem; color: #87929c; font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; }
+  .pane-label svg { width: 1rem; height: 1rem; }
+  .agent-request { max-width: 360px; margin: 2rem 0 1.5rem; font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 560; line-height: 1.4; }
+  .tool-call { overflow: hidden; border: 1px solid var(--line); border-radius: 5px; background: #090d11; }
+  .tool-call-head { display: flex; justify-content: space-between; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--line); color: #78838e; font-family: var(--font-mono); font-size: 0.62rem; }
+  .tool-call code { display: block; padding: 1rem; color: #bac4cc; font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.75; white-space: nowrap; }
+  .tool-call code span { color: var(--cyan); }
+  .tool-call code em { color: var(--mint); font-style: normal; }
+  .route-pane { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; padding: 1.5rem 0; background: #0f151b; }
+  .route-line { display: flex; align-items: center; width: 100%; color: var(--cyan); }
+  .route-line span { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(99,199,232,0.9)); }
+  .route-line svg { width: 1rem; height: 1rem; margin-left: -0.35rem; }
+  .route-line.outgoing span { background: linear-gradient(90deg, rgba(112,214,163,0.9), transparent); }
+  .route-line.outgoing { color: var(--mint); }
+  .master-node { display: flex; align-items: center; flex-direction: column; text-align: center; }
+  .master-node > svg { width: 2.7rem; height: 2.7rem; margin-bottom: 0.8rem; color: var(--mint); }
+  .master-node strong { font-size: 0.9rem; }
+  .master-node span { margin-top: 0.35rem; color: #78848e; font-family: var(--font-mono); font-size: 0.58rem; }
+  .worker-pane { display: flex; flex-direction: column; }
+  .worker-identity { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.8rem; margin-top: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--line); }
+  .worker-icon { display: grid; width: 2.7rem; height: 2.7rem; place-items: center; border: 1px solid rgba(112,214,163,0.28); border-radius: 5px; background: rgba(112,214,163,0.07); color: var(--mint); }
+  .worker-icon svg { width: 1.25rem; height: 1.25rem; }
+  .worker-identity strong, .worker-identity span { display: block; }
+  .worker-identity strong { font-family: var(--font-mono); font-size: 0.78rem; }
+  .worker-identity div > span { margin-top: 0.25rem; color: #7d8892; font-size: 0.68rem; }
+  .result-line { display: flex; align-items: center; gap: 0.7rem; margin-top: 2rem; padding: 0.9rem; border-left: 2px solid var(--mint); background: rgba(112,214,163,0.07); color: #cbd5ce; font-family: var(--font-mono); font-size: 0.69rem; line-height: 1.5; }
+  .result-line svg { width: 1rem; height: 1rem; flex: 0 0 auto; color: var(--mint); }
+  .boundary-line { display: flex; align-items: center; gap: 0.5rem; margin-top: auto; padding-top: 1.5rem; color: #7d8892; font-family: var(--font-mono); font-size: 0.62rem; }
+  .boundary-line svg { width: 0.9rem; height: 0.9rem; color: var(--amber); }
+  @media (max-width: 900px) {
+    .execution-grid { grid-template-columns: 1fr; }
+    .agent-pane, .worker-pane { border: 0; }
+    .route-pane { min-height: 160px; border-block: 1px solid var(--line); }
+    .route-line { width: 45%; transform: rotate(90deg); }
+    .worker-pane { min-height: 330px; }
+  }
+  @media (max-width: 520px) { .agent-pane, .worker-pane { padding: 1.25rem; } .tool-call code { font-size: 0.64rem; } }
+</style>

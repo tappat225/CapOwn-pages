@@ -2,19 +2,25 @@
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
+import ProductDemo from '../../components/ProductDemo.astro';
 import Features from '../../components/Features.astro';
 import Flow from '../../components/Flow.astro';
+import Security from '../../components/Security.astro';
+import GetStarted from '../../components/GetStarted.astro';
 import Footer from '../../components/Footer.astro';
 
 const lang = 'en' as const;
 ---
 
-<Base lang={lang} title="CapOwn | Agent-native remote execution" description="Let your AI Agent securely command remote machines through NAT — no inbound ports, no complex setup.">
+<Base lang={lang} title="CapOwn | Agent-native remote execution" description="Give your AI agent a safe path to machines behind NAT through MCP or CLI, without opening inbound ports.">
   <Header lang={lang} />
   <main>
     <Hero lang={lang} />
+    <ProductDemo lang={lang} />
     <Features lang={lang} />
     <Flow lang={lang} />
+    <Security lang={lang} />
+    <GetStarted lang={lang} />
   </main>
   <Footer lang={lang} />
 </Base>

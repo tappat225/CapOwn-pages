@@ -1,90 +1,41 @@
 ---
+import { ExternalLink } from '@lucide/astro';
 import type { Lang } from '../i18n/index';
 import { t } from '../i18n/index';
 
-interface Props {
-  lang: Lang;
-}
-
+interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const i = t(lang);
+const docsUrl = lang === 'zh' ? 'https://docs.capown.net/zh/' : 'https://docs.capown.net/';
 ---
 
 <footer class="site-footer">
-  <div class="footer-inner">
+  <div class="footer-inner section-shell">
     <div class="footer-brand">
-      <img src="/capown-logo.png" alt="" width="28" height="28" />
-      <span>CAPOWN</span>
+      <div><img src="/capown-logo.png" alt="" width="34" height="34" /><strong>CapOwn</strong></div>
+      <p>{i.footer.tagline}</p>
     </div>
-    <nav class="footer-links">
-      <a href="https://github.com/tappat225/CapOwn" target="_blank" rel="noreferrer">GitHub</a>
-      <a href="https://github.com/tappat225/CapOwn/blob/main/docs/user_guide.md" target="_blank" rel="noreferrer">{i.footer.docs}</a>
-      <a href="https://dashboard.capown.net" target="_blank" rel="noreferrer">Dashboard</a>
+    <nav aria-label="Footer">
+      <a href={docsUrl} target="_blank" rel="noreferrer">{i.footer.docs}<ExternalLink aria-hidden="true" /></a>
+      <a href="https://github.com/tappat225/CapOwn" target="_blank" rel="noreferrer">{i.footer.github}<ExternalLink aria-hidden="true" /></a>
+      <a href="https://gitee.com/TappaT/CapOwn" target="_blank" rel="noreferrer">{i.footer.gitee}<ExternalLink aria-hidden="true" /></a>
     </nav>
-    <p class="footer-license">{i.footer.license}</p>
+    <p class="license">{i.footer.license}</p>
   </div>
 </footer>
 
 <style>
-  .site-footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 3rem 1.5rem;
-  }
-
-  .footer-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: min(1120px, 100%);
-    margin: 0 auto;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-  }
-
-  .footer-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .footer-brand img {
-    height: 1.6rem;
-    width: auto;
-    opacity: 0.7;
-  }
-
-  .footer-brand span {
-    font-size: 0.78rem;
-    font-weight: 860;
-    letter-spacing: 0.2em;
-    color: var(--quiet);
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  .footer-links a {
-    color: var(--muted);
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: color 180ms ease;
-  }
-
-  .footer-links a:hover { color: var(--mint); }
-
-  .footer-license {
-    margin: 0;
-    color: var(--quiet);
-    font-size: 0.72rem;
-    letter-spacing: 0.05em;
-  }
-
-  @media (max-width: 520px) {
-    .footer-inner {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
+  .site-footer { padding: 3rem 0; border-top: 1px solid var(--line); background: #090c0f; }
+  .footer-inner { display: grid; grid-template-columns: 1.2fr auto auto; align-items: end; gap: 3rem; }
+  .footer-brand > div { display: flex; align-items: center; gap: 0.65rem; }
+  .footer-brand img { width: 1.8rem; height: 1.8rem; object-fit: contain; }
+  .footer-brand strong { font-size: 0.95rem; }
+  .footer-brand p, .license { margin: 0.7rem 0 0; color: var(--quiet); font-size: 0.72rem; }
+  nav { display: flex; gap: 1.4rem; }
+  nav a { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--muted); font-size: 0.76rem; }
+  nav a:hover { color: var(--white); }
+  nav svg { width: 0.7rem; height: 0.7rem; }
+  .license { margin: 0; font-family: var(--font-mono); font-size: 0.62rem; }
+  @media (max-width: 780px) { .footer-inner { grid-template-columns: 1fr; align-items: start; gap: 1.6rem; } }
+  @media (max-width: 420px) { nav { flex-direction: column; gap: 0.8rem; } }
 </style>
